@@ -1,0 +1,7 @@
+numpy
+scipy
+matplotlib
+seaborn
+netneurotools
+scikit-learn
+brainconn
