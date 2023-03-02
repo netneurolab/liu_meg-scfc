@@ -6,11 +6,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as sstats
 import seaborn as sns
-from netneurotools.metrics import communicability_wei
 from netneurotools.stats import get_dominance_stats
 from sklearn.linear_model import LinearRegression
 
-from utils import navigation_wu, search_information
+from utils import navigation_wu, search_information, communicability_wei
 
 
 # define paths and constants

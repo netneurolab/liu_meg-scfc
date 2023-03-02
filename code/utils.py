@@ -2,6 +2,7 @@ import itertools
 
 import brainconn as bc
 import numpy as np
+import scipy
 from tqdm import tqdm
 
 
@@ -124,3 +125,45 @@ def group_by_index(val_List, idx_list):
     for _ in sorted(set(idx_list)):
         result.append([val_List[it] for it, idx in enumerate(idx_list) if idx == _])
     return result
+
+
+def communicability_wei(adjacency):
+    """
+    Computes the communicability of pairs of nodes in `adjacency`
+    Parameters
+    ----------
+    adjacency : (N, N) array_like
+        Weighted, direct/undirected connection weight/length array
+    Returns
+    -------
+    cmc : (N, N) numpy.ndarray
+        Symmetric array representing communicability of nodes {i, j}
+    References
+    ----------
+    Crofts, J. J., & Higham, D. J. (2009). A weighted communicability measure
+    applied to complex brain networks. Journal of the Royal Society Interface,
+    6(33), 411-414.
+    Examples
+    --------
+    >>> from netneurotools import metrics
+    >>> A = np.array([[2, 0, 3], [0, 2, 1], [0.5, 0, 1]])
+    >>> Q = metrics.communicability_wei(A)
+    >>> Q
+    array([[0.        , 0.        , 1.93581903],
+           [0.07810379, 0.        , 0.94712177],
+           [0.32263651, 0.        , 0.        ]])
+    """
+
+    # negative square root of nodal degrees
+    row_sum = adjacency.sum(1)
+    neg_sqrt = np.power(row_sum, -0.5)
+    square_sqrt = np.diag(neg_sqrt)
+
+    # normalize input matrix
+    for_expm = square_sqrt @ adjacency @ square_sqrt
+
+    # calculate matrix exponential of normalized matrix
+    cmc = scipy.sparse.linalg.expm(for_expm)
+    cmc[np.diag_indices_from(cmc)] = 0
+
+    return cmc
