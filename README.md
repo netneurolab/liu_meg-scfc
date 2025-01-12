@@ -1,5 +1,7 @@
 # Spatially heterogeneous structure-function coupling in haemodynamic and electromagnetic brain networks
-This repository contains processing scripts and data in support of the preprint "Spatially heterogeneous structure-function coupling in haemodynamic and electromagnetic brain networks" on [bioRxiv]((https://doi.org/10.1101/2022.12.14.520453)).
+This repository contains processing scripts and data in support of the paper:
+
+Liu, Z.-Q., Shafiei, G., Baillet, S., & Misic, B. (2023). Spatially heterogeneous structure-function coupling in haemodynamic and electromagnetic brain networks. _NeuroImage_, _278_, 120276. [https://doi.org/10.1016/j.neuroimage.2023.120276](https://doi.org/10.1016/j.neuroimage.2023.120276)
 
 ## `code`
 The [`code`](code/) folder contains all the code used to run the analyses and generate the figures.
